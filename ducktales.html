@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Hotlink-Menü Terminal</title>
+<style>
+    body { 
+        line-height: 1.;
+        font-family: monospace; 
+        background: rgb(0, 0, 0); 
+        color: rgb(255, 255, 0); 
+        padding: 0px; 
+        margin: 0; 
+        overflow: hidden; 
+    }
+
+    #logo { 
+        text-align: center; 
+          margin-bottom: 20px; 
+    }
+
+    h2 {
+        color: #aaccee;
+        margin-top: 15px;
+        font-size: 20px;
+        text-align: center;
+        white-space: pre;
+    }
+
+    .item {
+        color: #aaccee;
+        margin: 3px 0;
+        font-size: 20px;
+        text-align: center;
+        white-space: pre;
+    }
+
+    #message { 
+        color: #aaccee; 
+        margin-top: 10px; 
+        min-height: 1em; 
+        text-align: center;
+    }
+
+    #codeInput { 
+        position: absolute; 
+        opacity: 0; 
+        pointer-events: none; 
+    }
+
+    #loading { 
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%);
+        font-family: monospace; 
+        color: #aaccee; 
+        font-size: 24px; 
+        display: none; 
+        text-align: center; 
+        white-space: pre; 
+    }
+</style>
+</head>
+<body>
+
+<div id="logo">
+<pre>
+
+   █████████   ███                      ██████████    ███            ████ 
+  ███▒▒▒▒▒███ ▒▒▒                      ▒▒███▒▒▒▒███  ▒▒▒            ▒▒███ 
+ ███     ▒▒▒  ████  ████████    ██████  ▒███   ▒▒███ ████   ██████   ▒███ 
+▒███         ▒▒███ ▒▒███▒▒███  ███▒▒███ ▒███    ▒███▒▒███  ▒▒▒▒▒███  ▒███ 
+▒███          ▒███  ▒███ ▒███ ▒███████  ▒███    ▒███ ▒███   ███████  ▒███ 
+▒▒███     ███ ▒███  ▒███ ▒███ ▒███▒▒▒   ▒███    ███  ▒███  ███▒▒███  ▒███ 
+ ▒▒█████████  █████ ████ █████▒▒██████  ██████████   █████▒▒████████ █████
+  ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒  ▒▒▒▒▒▒▒▒ ▒▒▒▒▒ 
+
+  
+░█░█░█▀█░█▄█░█▀▀░░▀█▀░█░█░█▀▀░█▀█░▀█▀░█▀▀░█▀▄░░█▀█░█▀▀░▀█▀░█░█░█▀█░█▀▄░█░█
+░█▀█░█░█░█░█░█▀▀░░░█░░█▀█░█▀▀░█▀█░░█░░█▀▀░█▀▄░░█░█░█▀▀░░█░░█▄█░█░█░█▀▄░█▀▄
+░▀░▀░▀▀▀░▀░▀░▀▀▀░░░▀░░▀░▀░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░░▀░▀░▀▀▀░░▀░░▀░▀░▀▀▀░▀░▀░▀░▀
+
+
+<span style="color:#ff6400;">█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████</span>
+
+<span style="color:#ff8200;">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</span>
+
+<span style="color:#eadf80;">▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒</span>
+</pre>
+</div>
+
+<p></p>
+<input type="text" id="codeInput" autofocus="">
+
+<div id="menu"></div>
+<div id="message"></div>
+<div id="loading">Loading...</div>
+
+<script>
+    const lastPositions = {}; // speichert Videopositionen
+// HOTLINK-DATEN
+const menus = {
+    "▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁": {
+    "▓▒ NO ▒▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ TITLE ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▒▒ CINEDIAL-ID ▒▒▓▒ YEAR ▒▓": "jailbait.mp4",
+    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": "jailbait.mp4",
+    "▓▒ 01 ▒▓▒ DON'T GIVE UP THE SHIP            ▒▓▒ (583-912-740) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E01%20Dont%20give%20up%20the%20ship.mp4",
+    "▓▒ 02 ▒▓▒ WRONGUAY IN RONGUAY               ▒▓▒ (176-845-329) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E02%20Wronguay%20in%20Ronguay.mp4",
+    "▓▒ 03 ▒▓▒ THREE DUCKS OF THE CONDOR         ▒▓▒ (904-267-518) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E03%20Three%20Ducks%20of%20the%20Condor.mp4",
+    "▓▒ 04 ▒▓▒ COLD DUCK                         ▒▓▒ (352-698-107) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E04%20Cold%20Duck.mp4",
+    "▓▒ 05 ▒▓▒ TOO MUCH OF A GOLD THING          ▒▓▒ (781-430-265) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E05%20Too%20Much%20of%20a%20Gold%20Thing.mp4",
+    "▓▒ 06 ▒▓▒ SEND IN THE CLONES                ▒▓▒ (629-517-804) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E06%20Send%20in%20the%20Clones.mp4",
+    "▓▒ 07 ▒▓▒ SPHINX FOR THE MEMORIES           ▒▓▒ (498-302-671) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E07%20Sphinx%20for%20the%20Memories.mp4",
+    "▓▒ 08 ▒▓▒ NO DUCK HAS GONE BEFORE           ▒▓▒ (835-764-290) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E08%20No%20Duck%20Has%20Gone%20Before.mp4",
+    "▓▒ 09 ▒▓▒ ARMSTRONG                         ▒▓▒ (217-953-486) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E09%20Armstong.mp4",
+    "▓▒ 10 ▒▓▒ ROBOT ROBBERS                     ▒▓▒ (690-128-574) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E10%20Robot%20Robbers.mp4",
+    "▓▒ 11 ▒▓▒ MAGICA'S SHADOW WAR               ▒▓▒ (543-871-902) ▒▓▒ 1987 ▒▓": "https://archive.org/download/Ducktales-Complete-Series/Season%201/DuckTales%20S01E11%20Magica_s%20Shadow%20War.mp4"
+},
+
+    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": {
+        
+    "▒ BACK TO MAIN MENU (000-000-000) ▒": "menue.html"     
+        
+   
+        
+    }
+    
+};
+
+// Menü anzeigen
+const menuDiv = document.getElementById("menu");
+for (let category in menus) {
+    const h2 = document.createElement("h2");
+    h2.textContent = category;
+    menuDiv.appendChild(h2);
+
+    const items = menus[category];
+    for (let title in items) {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.textContent = title;
+        menuDiv.appendChild(div);
+    }
+}
+
+// Nachricht & Input
+const messageDiv = document.getElementById("message");
+const codeInput = document.getElementById("codeInput");
+window.addEventListener("keydown", () => codeInput.focus());
+
+function normalizeCode(code) {
+    return code.replace(/[-\s]/g,'');
+}
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playBeep(freq = 600, duration = 100) {
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.type = 'square';
+    oscillator.frequency.value = freq;
+    gainNode.gain.value = 0.1;
+    oscillator.start();
+    setTimeout(() => oscillator.stop(), duration);
+}
+
+// Ladeanimation
+function showLoadingAnimation(callback) {
+    menuDiv.style.display="none"; // Menü ausblenden
+
+    const loadingDiv = document.getElementById("loading");
+    loadingDiv.style.display = "block";
+
+    const asciiArt = `
+░       ░░░        ░░░      ░░░  ░░░░░░░░░░░░░░        ░░   ░░░  ░ 
+▒  ▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒▒  ▒▒▒▒  ▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒    ▒▒  ▒
+▓  ▓▓▓▓  ▓▓▓▓▓  ▓▓▓▓▓  ▓▓▓▓  ▓▓  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ▓▓▓▓▓  ▓  ▓  ▓
+█  ████  █████  █████        ██  █████████████████  █████  ██    █
+█       ███        ██  ████  ██        ████████        ██  ███   █
+                                                                  `;
+
+    let visible = true;
+    const blinkInterval = setInterval(()=>{
+        loadingDiv.textContent = visible? asciiArt : "";
+        visible=!visible;
+    },500);
+
+    // Nummernwählen
+    const inputCode = codeInput.value;
+    let index=0;
+    function playNextDigit(){
+        if(index>=inputCode.length){ startFax(); return; }
+        const digit = inputCode[index];
+        if(/\d/.test(digit)) playTone(300+parseInt(digit)*100,300);
+        index++;
+        setTimeout(playNextDigit,400);
+    }
+
+    function playTone(freq,duration){
+        const osc=audioCtx.createOscillator();
+        const gain=audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type='square';
+        osc.frequency.setValueAtTime(freq,audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1,audioCtx.currentTime);
+        osc.start();
+        osc.stop(audioCtx.currentTime+duration/1000);
+        osc.onended=()=>{osc.disconnect();gain.disconnect();}
+    }
+
+    let faxInterval;
+    function startFax(){
+        let timeElapsed=0;
+        faxInterval=setInterval(()=>{
+            if(timeElapsed>=10000){ 
+                clearInterval(faxInterval);
+                clearInterval(blinkInterval);
+                loadingDiv.style.display="none";
+                if(callback) callback();
+                return;
+            }
+            playTone(200+Math.random()*800,100);
+            timeElapsed+=100;
+        },100);
+    }
+
+    playNextDigit();
+}
+
+// Video
+
+// Ein einziges Video-Element für alles
+let currentVideo = document.createElement("video");
+currentVideo.style.position = "fixed";
+currentVideo.style.top = 0;
+currentVideo.style.left = 0;
+currentVideo.style.width = "100%";
+currentVideo.style.height = "100%";
+currentVideo.style.background = "#000";
+currentVideo.style.zIndex = 9999;
+currentVideo.controls = false;
+currentVideo.autoplay = true;
+currentVideo.style.display = "none";
+document.body.appendChild(currentVideo);
+
+let videoPlaying = false; // NEU: merkt, ob Video aktiv ist
+
+function startVideo(src) {
+    const currentSrc = currentVideo.src.split('/').pop(); // nur Dateiname
+    if(videoPlaying && currentSrc === src) return; // Video läuft schon, nicht neu starten
+
+    currentVideo.src = src;
+    currentVideo.currentTime = 0;
+    currentVideo.style.display = "block";
+    videoPlaying = true;
+    currentVideo.play().catch(() => console.log("Autoplay blockiert"));
+
+    if(currentVideo.requestFullscreen) currentVideo.requestFullscreen();
+}
+
+
+function closeVideo() {
+    currentVideo.pause();
+    currentVideo.style.display = "none";
+    videoPlaying = false;
+    codeInput.focus();
+    menuDiv.style.display = "block";
+}
+
+codeInput.addEventListener("keydown", function(e){
+    playBeep(700,50);
+
+    if(videoPlaying){ // --- Video läuft ---
+        switch(e.code){
+            case "Enter": case "NumpadEnter": currentVideo.paused ? currentVideo.play() : currentVideo.pause(); e.preventDefault(); break;
+            case "Numpad6": case "ArrowRight": currentVideo.currentTime = Math.min(currentVideo.currentTime + 10, currentVideo.duration); e.preventDefault(); break;
+            case "Numpad4": case "ArrowLeft": currentVideo.currentTime = Math.max(currentVideo.currentTime - 10, 0); e.preventDefault(); break;
+            case "NumpadAdd": case "Equal": currentVideo.volume = Math.min(currentVideo.volume + 0.1, 1); e.preventDefault(); break;
+            case "NumpadSubtract": case "Minus": currentVideo.volume = Math.max(currentVideo.volume - 0.1, 0); e.preventDefault(); break;
+            case "Digit0": case "Numpad0": closeVideo(); e.preventDefault(); break;
+        }
+        return; // WICHTIG: Menü-Logik wird NICHT ausgeführt, solange Video läuft
+    }
+
+    // --- Menü-Logik ---
+    if(e.code === "Enter" || e.code === "NumpadEnter"){
+        const code = normalizeCode(codeInput.value);
+        let found = null;
+        let titleFound = null;
+
+        outerLoop:
+        for(let category in menus){
+            const items = menus[category];
+            for(let title in items){
+                const titleCodeMatch = title.match(/\((.*?)\)/);
+                if(!titleCodeMatch) continue;
+                const itemCode = normalizeCode(titleCodeMatch[1]);
+                if(itemCode === code){
+                    found = items[title];
+                    titleFound = title;
+                    break outerLoop;
+                }
+            }
+        }
+
+        showLoadingAnimation(()=>{
+            if(found){
+                messageDiv.textContent = `LAST WATCHED: ${titleFound}`;
+                if(found.endsWith(".mp4")) startVideo(found);
+                else window.location.href = found;
+            } else {
+                messageDiv.textContent = "XXX ABORTED. ID NOT AVAILABLE.";
+                menuDiv.style.display="block";
+            }
+            codeInput.value="";
+        });
+
+        e.preventDefault();
+    }
+});
+</script>
+    
+    
+<script>
+  document.addEventListener('keydown', function(event) {
+    // Prüfen, ob die Taste vom Nummernblock kommt
+    if (event.code === 'NumpadAdd') {
+      window.scrollBy({
+        top: 200, // Anzahl Pixel nach unten
+        behavior: 'smooth'
+      });
+    } else if (event.code === 'NumpadSubtract') {
+      window.scrollBy({
+        top: -200, // Anzahl Pixel nach oben
+        behavior: 'smooth'
+      });
+    }
+  });
+</script>
+    
+    
+</body>
+</html>
