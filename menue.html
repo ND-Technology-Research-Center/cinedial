@@ -86,12 +86,29 @@
 
 <span style="color:#ff8200;">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</span>
 
-<span style="color:#eadf80;">▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒</span>
+<span style="color:#eadf80;">▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+
+
+PRESS [+] AND [-] TO NAVIGATE THROUGH THE VIRTUAL CATALOGUE. PRESS [ENTER] AFTER DIALING TO CONFIRM
+
+DURING THE SCREENING, USE [4] TO REWIND, AND [6] TO FAST FORWARD 10 SECONDS
+PRESS [0] TO RETURN TO THE CATALOGUE. USE [ENTER] TO PAUSE AND PLAY THE FILM
+</span>
 </pre>
 </div>
 
 <p></p>
-<input type="text" id="codeInput" autofocus="">
+<input 
+  type="text" 
+  id="codeInput" 
+  autofocus 
+  autocomplete="off" 
+  autocorrect="off" 
+  autocapitalize="off" 
+  spellcheck="false"
+  style="opacity:0;pointer-events:none;position:absolute;"
+>
+
 
 <div id="menu"></div>
 <div id="message"></div>
@@ -101,32 +118,49 @@
     const lastPositions = {}; // speichert Videopositionen
 // HOTLINK-DATEN
 const menus = {
-    "▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁": {
-    "▓▒ GENRE ▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒ TITLE ▒▒▒▒▒▒▒▒▒▒▓▒▒ CINEDIAL-ID ▒▒▓▒ YEAR ▒▓": "jailbait.mp4",
-    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": "jailbait.mp4",
-    "▓▒ FILM NOIR   ▒▓▒ JAILBAIT                 ▒▓▒ (420-696-969) ▒▓▒ 1954 ▒▓": "https://ia601306.us.archive.org/27/items/JailBait/JailBait_512kb.mp4",
-    "▓▒ SCI-FICTION ▒▓▒ VOYAGERS TO MARS         ▒▓▒ (555-131-606) ▒▓▒ 1980 ▒▓": "voyagers.mp4",
-    "▓▒ SCI-FICTION ▒▓▒ MURDER IN SPACE          ▒▓▒ (627-282-584) ▒▓▒ 1985 ▒▓": "https://dn710003.ca.archive.org/0/items/murder-in-space-1985/Murder%20in%20Space%20%281985%29.mp4",
-    "▓▒ LIVE ACTION ▒▓▒ BATMAN - THE BAT'S CAVE  ▒▓▒ (212-013-114) ▒▓▒ 1943 ▒▓": "https://dn720708.ca.archive.org/0/items/batman-1943-colorized/02%20The%20Bat%27s%20Cave.mp4",
-    "▓▒ HORROR      ▒▓▒ FRANKENSTEIN             ▒▓▒ (518-114-119) ▒▓▒ 1931 ▒▓": "https://ia601801.us.archive.org/30/items/frankenstein-1931-colorized_202407/Frankenstein%20%281931%29%20Colorized.ia.mp4",
-    "▓▒ DRAMA       ▒▓▒ CAT'S EYE                ▒▓▒ (312-042-512) ▒▓▒ 1985 ▒▓": "https://ia802304.us.archive.org/26/items/cats-eye-1985-dvdrip/Cats%20Eye%201985%20dvdrip.mp4",
-    "▓▒ THRILLER    ▒▓▒ NIGHTKILL                ▒▓▒ (666-753-179) ▒▓▒ 1980 ▒▓": "https://dn710202.ca.archive.org/0/items/nightkill-1980/Nightkill%201980.mp4",
-    "▓▒ WESTERN     ▒▓▒ THE OVER-THE-HILL GANG...▒▓▒ (853-075-994) ▒▓▒ 1970 ▒▓": "https://dn710003.ca.archive.org/0/items/turner_video_82179/82179.mp4",
-    "▓▒ DOCUMENTARY ▒▓▒ SECRETS OF THE TITANIC   ▒▓▒ (259-568-285) ▒▓▒ 1987 ▒▓": "https://dn720308.ca.archive.org/0/items/secrets-of-the-titanic/Secrets%20of%20the%20Titanic%20%281987%29.mp4",
-    "▓▒ SCI-FICTION ▒▓▒ SUPERMAN                 ▒▓▒ (132-623-597) ▒▓▒ 1978 ▒▓": "https://dn720701.ca.archive.org/0/items/Superman1978BRRipDualAudio720pByeArnavSinha_201903/Superman%201978-BRRip%20Dual%20Audio%20720p%20Bye%20Arnav%20Sinha.mp4",
-    "▓▒ SCI-FICTION ▒▓▒ GEORGE ORWELL'S 1984     ▒▓▒ (131-242-069) ▒▓▒ 1984 ▒▓": "https://ia902902.us.archive.org/2/items/1984-1984_202511/1984%20(1984)/1984%20(1984).ia.mp4"
+    
+    "MOVIES": {
+    "▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁": "staatsfeinde.mp4",
+    "▓▒NO.▒▓▒ GENRE ▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒ TITLE ▒▒▒▒▒▒▒▒▒▒▓▒▒ CINEDIAL-ID ▒▒▓▒ YEAR ▒▓": "jailbait.mp4",
+    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": "jailbait.mp4",
+    "▓▒001▒▓▒ ACTION      ▒▓▒ BIG TR. IN LITTLE CHINA  ▒▓▒ (585-442-682) ▒▓▒ 1986 ▒▓": "https://archive.org/download/big-trouble-little-china/Big%20Trouble%20In%20Little%20China%20720p.mp4",
+    "▓▒002▒▓▒ ADVENTURE   ▒▓▒ BATMAN - THE BAT'S CAVE  ▒▓▒ (212-013-114) ▒▓▒ 1943 ▒▓": "https://dn720708.ca.archive.org/0/items/batman-1943-colorized/02%20The%20Bat%27s%20Cave.mp4",
+    "▓▒003▒▓▒ ADVENTURE   ▒▓▒ JURASSIC PARK            ▒▓▒ (738-528-437) ▒▓▒ 1993 ▒▓": "https://archive.org/download/the.-adventures.-of.-prince.-achmed.-1926.720p.-blu-ray.x-264-public-hd/The.Adventures.Of.Prince.Achmed.1926.720p.BluRay.x264-PublicHD.mp4",
+    "▓▒004▒▓▒ COMEDY      ▒▓▒ MONTHY PYTON- HOLY GRAIL ▒▓▒ (368-469-264) ▒▓▒ 1975 ▒▓": "https://archive.org/download/9convert.com-monty-python-and-the-holy-grail-1974-1080p/9convert.com%20-%20Monty%20Python%20and%20the%20Holy%20Grail%201974%20%201080p.mp4",
+    "▓▒005▒▓▒ COMPUTER AN.▒▓▒ BACK TO THE FUTURE 4     ▒▓▒ (195-520-150) ▒▓▒ 1993 ▒▓": "https://archive.org/download/back-to-the-future-episode-4-the-movie/hello%20bumbo.mp4",
+    "▓▒006▒▓▒ FILM NOIR   ▒▓▒ JAILBAIT                 ▒▓▒ (420-696-969) ▒▓▒ 1954 ▒▓": "https://ia601306.us.archive.org/27/items/JailBait/JailBait_512kb.mp4",
+    "▓▒007▒▓▒ HORROR      ▒▓▒ FRANKENSTEIN             ▒▓▒ (518-114-119) ▒▓▒ 1931 ▒▓": "https://ia601801.us.archive.org/30/items/frankenstein-1931-colorized_202407/Frankenstein%20%281931%29%20Colorized.ia.mp4",
+    "▓▒008▒▓▒ THRILLER    ▒▓▒ CAT'S EYE                ▒▓▒ (312-042-512) ▒▓▒ 1985 ▒▓": "https://ia802304.us.archive.org/26/items/cats-eye-1985-dvdrip/Cats%20Eye%201985%20dvdrip.mp4",
+    "▓▒009▒▓▒ THRILLER    ▒▓▒ NIGHTKILL                ▒▓▒ (666-753-179) ▒▓▒ 1980 ▒▓": "https://dn710202.ca.archive.org/0/items/nightkill-1980/Nightkill%201980.mp4",
+    "▓▒010▒▓▒ THRILLER    ▒▓▒ SILENCE OF THE LAMBS     ▒▓▒ (642-826-582) ▒▓▒ 1991 ▒▓": "https://archive.org/download/the-silence-of-the-lambs-1991_202405/The%20Silence%20of%20the%20Lambs%201991.mp4",
+    "▓▒011▒▓▒ THRILLER    ▒▓▒ MANHUNTER [RED DRAGON]   ▒▓▒ (724-654-388) ▒▓▒ 1986 ▒▓": "https://archive.org/download/manhunter.-1986-255910939230/Manhunter.1986-255910939230.ia.mp4",
+    "▓▒012▒▓▒ THRILLER    ▒▓▒ MIDNIGHT EXPRESS         ▒▓▒ (286-346-833) ▒▓▒ 1978 ▒▓": "https://archive.org/download/midnight-express-1978_202511/Midnight%20Express%20%281978%29/Midnight%20Express%20-%201978.mp4",
+    "▓▒013▒▓▒ WESTERN     ▒▓▒ THE OVER-THE-HILL GANG...▒▓▒ (853-075-994) ▒▓▒ 1970 ▒▓": "https://dn710003.ca.archive.org/0/items/turner_video_82179/82179.mp4",
+    "▓▒014▒▓▒ DOCUMENTARY ▒▓▒ SECRETS OF THE TITANIC   ▒▓▒ (259-568-285) ▒▓▒ 1987 ▒▓": "https://dn720308.ca.archive.org/0/items/secrets-of-the-titanic/Secrets%20of%20the%20Titanic%20%281987%29.mp4",
+    "▓▒015▒▓▒ SCI-FICTION ▒▓▒ SUPERMAN                 ▒▓▒ (132-623-597) ▒▓▒ 1978 ▒▓": "https://dn720701.ca.archive.org/0/items/Superman1978BRRipDualAudio720pByeArnavSinha_201903/Superman%201978-BRRip%20Dual%20Audio%20720p%20Bye%20Arnav%20Sinha.mp4",
+    "▓▒016▒▓▒ SCI-FICTION ▒▓▒ GEORGE ORWELL'S 1984     ▒▓▒ (131-242-069) ▒▓▒ 1984 ▒▓": "https://ia902902.us.archive.org/2/items/1984-1984_202511/1984%20(1984)/1984%20(1984).ia.mp4",
+    "▓▒017▒▓▒ SCI-FICTION ▒▓▒ VOYAGERS TO MARS         ▒▓▒ (555-131-606) ▒▓▒ 1986 ▒▓": "voyagers.mp4",
+    "▓▒018▒▓▒ SCI-FICTION ▒▓▒ MURDER IN SPACE          ▒▓▒ (627-282-584) ▒▓▒ 1985 ▒▓": "https://dn710003.ca.archive.org/0/items/murder-in-space-1985/Murder%20in%20Space%20%281985%29.mp4",
+    "▓▒019▒▓▒ SCI-FICTION ▒▓▒ ROBOCOP                  ▒▓▒ (845-387-727) ▒▓▒ 1987 ▒▓": "https://archive.org/download/robocop-1987_202311/Robocop%201987.mp4",
+    "▓▒020▒▓▒ SCI-FICTION ▒▓▒ ROBOCOP 2                ▒▓▒ (845-589-482) ▒▓▒ 1990 ▒▓": "https://archive.org/download/robocop-1987_202311/Robocop%202.mp4",
+    "▓▒021▒▓▒ SCI-FICTION ▒▓▒ ROBOCOP 3                ▒▓▒ (845-834-653) ▒▓▒ 1993 ▒▓": "https://archive.org/download/robocop-1987_202311/Robocop%203.mp4",
+    "▓▒022▒▓▒ ANIMATION   ▒▓▒ ADVENT. OF PRINCE ACHMED ▒▓▒ (847-478-753) ▒▓▒ 1926 ▒▓": "https://archive.org/download/the.-adventures.-of.-prince.-achmed.-1926.720p.-blu-ray.x-264-public-hd/The.Adventures.Of.Prince.Achmed.1926.720p.BluRay.x264-PublicHD.mp4",
+    "▓▒023▒▓▒ DRAMA       ▒▓▒ THE THIRD GENERATION [DE]▒▓▒ (836-943-568) ▒▓▒ 1979 ▒▓": "https://archive.org/download/the.-third.-generation.-1979/The.Third.Generation.1979.mp4",
+
+
+
 },
 
-    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": {
+    "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": {
         
           
         
         "TV SHOWS": "staatsfeinde.mp4",
-    "▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁": "ghrthrh.html",
-    "▓▒ GENRE ▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒ SHOW ▒▒▒▒▒▒▒▒▒▒▒▓▒▒ CINEDIAL-ID ▒▒▓▒ YEAR ▒▓": "jailbait.mp4", 
-        "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": "jailbait.mp4",    
-    "▓▒ CARTOON     ▒▓▒ DUCKTALES [S1]           ▒▓▒ (467-147-973) ▒▓▒ 1987 ▒▓": "ducktales.html",
-    "▓▒ SCI-FICTION ▒▓▒ STAR TREK - TNG [S1]     ▒▓▒ (201-706-014) ▒▓▒ 1987 ▒▓": "startrektng.html",    
+    "▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁": "ghrthrh.html",
+    "▓▒NO.▒▓▒ GENRE ▒▒▒▒▒▒▒▓▒▒▒▒▒▒▒▒▒▒▒ SHOW ▒▒▒▒▒▒▒▒▒▒▒▓▒▒ CINEDIAL-ID ▒▒▓▒ YEAR ▒▓": "jailbait.mp4", 
+        "▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔": "jailbait.mp4",    
+    "▓▒001▒▓▒ CARTOON     ▒▓▒ DUCKTALES [S1]           ▒▓▒ (467-147-973) ▒▓▒ 1987 ▒▓": "ducktales.html",
+    "▓▒002▒▓▒ SCI-FICTION ▒▓▒ STAR TREK [S1]           ▒▓▒ (201-706-014) ▒▓▒ 1987 ▒▓": "startrek.html",    
         
     }
 };
@@ -153,7 +187,8 @@ const codeInput = document.getElementById("codeInput");
 window.addEventListener("keydown", () => codeInput.focus());
 
 function normalizeCode(code) {
-    return code.replace(/[-\s]/g,'');
+    // Entfernt alles außer Ziffern
+    return code.replace(/\D/g, '');
 }
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -342,16 +377,52 @@ codeInput.addEventListener("keydown", function(e){
     // Prüfen, ob die Taste vom Nummernblock kommt
     if (event.code === 'NumpadAdd') {
       window.scrollBy({
-        top: 200, // Anzahl Pixel nach unten
-        behavior: 'smooth'
+        top: 50, // Anzahl Pixel nach unten
+        behavior: 'auto'
       });
     } else if (event.code === 'NumpadSubtract') {
       window.scrollBy({
-        top: -200, // Anzahl Pixel nach oben
-        behavior: 'smooth'
+        top: -50, // Anzahl Pixel nach oben
+        behavior: 'auto'
       });
     }
   });
+</script>
+    
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const delay = 200; // Abstand zwischen den Zeilen
+    const lines = document.querySelectorAll('#menu h2, #menu .item');
+
+    lines.forEach(line => line.style.display = 'none');
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playClick() {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'square'; // kurz und knackig
+        // Frequenz leicht variabel für realistischeren Klack
+        osc.frequency.value = 220 + Math.random() * 60; 
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        // extrem schnelles Abklingen
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.02);
+    }
+
+    lines.forEach((line, index) => {
+        setTimeout(() => {
+            line.style.display = 'block';
+            playClick();
+        }, index * delay);
+    });
+});
 </script>
     
     
